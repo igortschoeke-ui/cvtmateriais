@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitação de Materiais</title>
+  <style>
+    /* Estilo básico para tornar o site agradável em dispositivos móveis e desktops */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    h1 {
+      color: #0B3D91;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #0B3D91;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .material-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .material-item label {
+      flex: 1;
+    }
+
+    .material-item input {
+      width: 80px;
+      margin-left: 10px;
+    }
+
+    button {
+      background-color: #0B3D91;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    button:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+
+    #summary {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f1f5fb;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: none;
+    }
+
+    #summary p {
+      margin: 5px 0;
+    }
+
+    #summary ul {
+      padding-left: 20px;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    /* Estilo para as abas */
+    .tabs {
+      display: flex;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 10px;
+      background-color: #eee;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .tab-button.active {
+      background-color: #0B3D91;
+      color: #fff;
+      border-bottom: 2px solid #0B3D91;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Solicitação de Materiais</h1>
+    <p>Preencha os campos abaixo, selecione as quantidades dos materiais desejados e gere sua solicitação. Em seguida, você poderá enviar a lista diretamente no WhatsApp do responsável.</p>
+
+    <!-- Dados do instrutor e informações básicas -->
+    <div class="form-group">
+      <label for="instrutor">Nome do Instrutor</label>
+      <input type="text" id="instrutor" placeholder="Digite seu nome">
+    </div>
+    <div class="form-group">
+      <label for="treinamento">Treinamento/Curso</label>
+      <input type="text" id="treinamento" placeholder="Ex.: Combate a Incêndio">
+    </div>
+    <div class="form-group">
+      <label for="empresa">Empresa</label>
+      <input type="text" id="empresa" placeholder="Digite o nome da empresa">
+    </div>
+    <div class="form-group">
+      <label for="data">Data</label>
+      <input type="date" id="data">
+    </div>
+
+    <!-- Abas de categorias -->
+    <div class="tabs">
+      <button class="tab-button active" data-target="aph">APH</button>
+      <button class="tab-button" data-target="pci">PCI</button>
+      <button class="tab-button" data-target="pp">PP</button>
+      <button class="tab-button" data-target="vertical">VERTICAL</button>
+    </div>
+
+    <!-- Conteúdo das abas -->
+    <div id="tab-aph" class="tab-content active">
+      <h2>Materiais APH</h2>
+      <div class="material-item">
+        <label for="bolsaTrauma">Bolsa de Trauma</label>
+        <input type="number" id="bolsaTrauma" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="talas">Talas</label>
+        <input type="number" id="talas" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="maca">Maca</label>
+        <input type="number" id="maca" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="colarCervical">Colar Cervical</label>
+        <input type="number" id="colarCervical" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="bonecosRCP">Bonecos RCP</label>
+        <input type="number" id="bonecosRCP" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="mochilasOVACE">Mochilas OVACE</label>
+        <input type="number" id="mochilasOVACE" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="bonecas">Bonecas</label>
+        <input type="number" id="bonecas" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="bolsaSinaisVitais">Bolsa Sinais Vitais</label>
+        <input type="number" id="bolsaSinaisVitais" min="0" value="0">
+      </div>
+    </div>
+
+    <div id="tab-pci" class="tab-content">
+      <h2>Materiais PCI</h2>
+      <div class="material-item">
+        <label for="esguicho">Esguicho</label>
+        <input type="number" id="esguicho" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="reducao">Redução</label>
+        <input type="number" id="reducao" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="divisor">Divisor</label>
+        <input type="number" id="divisor" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="epi">EPI</label>
+        <input type="number" id="epi" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="epr">EPR</label>
+        <input type="number" id="epr" min="0" value="0">
+      </div>
+    </div>
+
+    <div id="tab-pp" class="tab-content">
+      <h2>Materiais PP</h2>
+      <div class="material-item">
+        <label for="rotulosRisco">Rótulos de Risco</label>
+        <input type="number" id="rotulosRisco" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="painelSeguranca">Painel de Segurança</label>
+        <input type="number" id="painelSeguranca" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="manualAbiquim">Manual Abiquim</label>
+        <input type="number" id="manualAbiquim" min="0" value="0">
+      </div>
+    </div>
+
+    <div id="tab-vertical" class="tab-content">
+      <h2>Materiais VERTICAL</h2>
+      <div class="material-item">
+        <label for="cordas">Cordas</label>
+        <input type="number" id="cordas" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="ferragens">Ferragens</label>
+        <input type="number" id="ferragens" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="macaSked">Maca Sked</label>
+        <input type="number" id="macaSked" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="macaMamute">Maca Mamute</label>
+        <input type="number" id="macaMamute" min="0" value="0">
+      </div>
+      <div class="material-item">
+        <label for="tripe">Tripe</label>
+        <input type="number" id="tripe" min="0" value="0">
+      </div>
+    </div>
+
+    <!-- Botões de ação e resumo -->
+    <button id="gerar">Gerar Solicitação</button>
+    <button id="enviar" disabled>Enviar no WhatsApp</button>
+    <div id="summary"></div>
+    <footer>
+      Criado para simplificar solicitações de materiais. Ajuste o número de contato do responsável no código, caso necessário.
+    </footer>
+  </div>
+
+  <script>
+    // Lista de materiais com IDs de entrada e nomes para exibição (inclui todas as categorias)
+    const materiais = [
+      // APH
+      { id: 'bolsaTrauma', nome: 'Bolsa de Trauma' },
+      { id: 'talas', nome: 'Talas' },
+      { id: 'maca', nome: 'Maca' },
+      { id: 'colarCervical', nome: 'Colar Cervical' },
+      { id: 'bonecosRCP', nome: 'Bonecos RCP' },
+      { id: 'mochilasOVACE', nome: 'Mochilas OVACE' },
+      { id: 'bonecas', nome: 'Bonecas' },
+      { id: 'bolsaSinaisVitais', nome: 'Bolsa Sinais Vitais' },
+      // PCI
+      { id: 'esguicho', nome: 'Esguicho' },
+      { id: 'reducao', nome: 'Redução' },
+      { id: 'divisor', nome: 'Divisor' },
+      { id: 'epi', nome: 'EPI' },
+      { id: 'epr', nome: 'EPR' },
+      // PP
+      { id: 'rotulosRisco', nome: 'Rótulos de Risco' },
+      { id: 'painelSeguranca', nome: 'Painel de Segurança' },
+      { id: 'manualAbiquim', nome: 'Manual Abiquim' },
+      // VERTICAL
+      { id: 'cordas', nome: 'Cordas' },
+      { id: 'ferragens', nome: 'Ferragens' },
+      { id: 'macaSked', nome: 'Maca Sked' },
+      { id: 'macaMamute', nome: 'Maca Mamute' },
+      { id: 'tripe', nome: 'Tripe' }
+    ];
+
+    // Gerenciamento das abas
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remover classe 'active' dos botões
+        tabButtons.forEach(b => b.classList.remove('active'));
+        // Adicionar classe 'active' ao botão clicado
+        btn.classList.add('active');
+        // Ocultar todas as abas
+        tabContents.forEach(c => c.style.display = 'none');
+        // Mostrar a aba correspondente
+        const targetId = 'tab-' + btn.dataset.target;
+        document.getElementById(targetId).style.display = 'block';
+      });
+    });
+
+    // Referências aos botões de ação e elementos de resumo
+    const btnGerar = document.getElementById('gerar');
+    const btnEnviar = document.getElementById('enviar');
+    const summaryDiv = document.getElementById('summary');
+
+    btnGerar.addEventListener('click', () => {
+      // Coletar dados básicos
+      const instrutor = document.getElementById('instrutor').value.trim();
+      const treinamento = document.getElementById('treinamento').value.trim();
+      const empresa = document.getElementById('empresa').value.trim();
+      const data = document.getElementById('data').value;
+
+      // Validar campos obrigatórios
+      if (!instrutor || !treinamento || !empresa || !data) {
+        alert('Por favor, preencha o nome do instrutor, treinamento, empresa e data.');
+        return;
+      }
+
+      // Coletar materiais e quantidades
+      const listaMateriais = [];
+      materiais.forEach(item => {
+        const quantidade = parseInt(document.getElementById(item.id).value, 10) || 0;
+        if (quantidade > 0) {
+          listaMateriais.push(`${item.nome}: ${quantidade}`);
+        }
+      });
+
+      if (listaMateriais.length === 0) {
+        alert('Selecione pelo menos um material com quantidade maior que zero.');
+        return;
+      }
+
+      // Montar resumo para exibir no site
+      let resumoHtml = '';
+      resumoHtml += `<p><strong>Instrutor:</strong> ${instrutor}</p>`;
+      resumoHtml += `<p><strong>Treinamento:</strong> ${treinamento}</p>`;
+      resumoHtml += `<p><strong>Empresa:</strong> ${empresa}</p>`;
+      resumoHtml += `<p><strong>Data:</strong> ${new Date(data).toLocaleDateString('pt-BR')}</p>`;
+      resumoHtml += '<p><strong>Materiais solicitados:</strong></p>';
+      resumoHtml += '<ul>';
+      listaMateriais.forEach(m => {
+        resumoHtml += `<li>${m}</li>`;
+      });
+      resumoHtml += '</ul>';
+      summaryDiv.innerHTML = resumoHtml;
+      summaryDiv.style.display = 'block';
+      
+      // Habilitar botão de envio
+      btnEnviar.disabled = false;
+
+      // Montar mensagem de WhatsApp (codificação de URL)
+      const mensagemTexto =
+        `Solicitação de Materiais%0A%0A` +
+        `Instrutor: ${encodeURIComponent(instrutor)}%0A` +
+        `Treinamento: ${encodeURIComponent(treinamento)}%0A` +
+        `Empresa: ${encodeURIComponent(empresa)}%0A` +
+        `Data: ${encodeURIComponent(new Date(data).toLocaleDateString('pt-BR'))}%0A%0A` +
+        `Materiais solicitados:%0A` +
+        listaMateriais.map(m => `• ${encodeURIComponent(m)}`).join('%0A');
+
+      // Número de telefone do responsável (exemplo: +55 47 99289-4756 -> formatado sem símbolos)
+      const numeroResponsavel = '5547992894756';
+
+      // Configurar clique do botão Enviar para abrir o WhatsApp
+      btnEnviar.onclick = () => {
+        const whatsappUrl = `https://wa.me/${numeroResponsavel}?text=${mensagemTexto}`;
+        window.open(whatsappUrl, '_blank');
+      };
+    });
+  </script>
+</body>
+</html>
