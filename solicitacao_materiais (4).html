@@ -73,7 +73,7 @@
       min-width: 120px;
       padding: 12px;
       background-color: #e9edf3;
-      color: #333;
+      color: #333333;
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -126,7 +126,7 @@
       margin-top: 20px;
     }
 
-    button.action-button {
+    .action-button {
       background-color: #0B3D91;
       color: #ffffff;
       border: none;
@@ -137,11 +137,11 @@
       font-size: 15px;
     }
 
-    button.action-button:hover {
+    .action-button:hover {
       background-color: #082f70;
     }
 
-    button.action-button:disabled {
+    .action-button:disabled {
       background-color: #aaaaaa;
       cursor: not-allowed;
     }
@@ -347,7 +347,7 @@
       </div>
 
       <div class="material-item">
-        <label for="tripe">Tripe</label>
+        <label for="tripe">Tripé</label>
         <input type="number" id="tripe" min="0" value="0">
       </div>
     </div>
@@ -389,7 +389,7 @@
       { id: 'ferragens', nome: 'Ferragens' },
       { id: 'macaSked', nome: 'Maca Sked' },
       { id: 'macaMamute', nome: 'Maca Mamute' },
-      { id: 'tripe', nome: 'Tripe' }
+      { id: 'tripe', nome: 'Tripé' }
     ];
 
     const tabButtons = document.querySelectorAll('.tab-button');
@@ -480,7 +480,7 @@
       mensagem += 'Materiais solicitados:\n';
 
       materiaisSelecionados.forEach(function(item) {
-        mensagem += '• ' + item.nome + ': ' + item.quantidade + '\n';
+        mensagem += '- ' + item.nome + ': ' + item.quantidade + '\n';
       });
 
       mensagemWhatsapp = mensagem;
